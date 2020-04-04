@@ -2,12 +2,12 @@ package com.ashish.portfolio.passwordStorage.controller;
 
 import com.ashish.portfolio.common.message.MessageListHandler;
 import com.ashish.portfolio.common.message.core.endpoint.EndPointResponse;
+import com.ashish.portfolio.common.message.core.endpoint.ResponseResult;
 import com.ashish.portfolio.passwordStorage.model.PasswordStorage;
 import com.ashish.portfolio.passwordStorage.model.PasswordStorageDTO;
 import com.ashish.portfolio.passwordStorage.repository.PasswordStorageRepository;
 import com.ashish.portfolio.passwordStorage.validator.PasswordStorageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,26 +29,26 @@ public class PasswordStorageController {
     }
 
     @GetMapping("/password-storage")
-    public ResponseEntity<?> getEntityByList() {
+    public EndPointResponse<?> getEntityByList() {
         List<PasswordStorage> passwordStorageList = passwordStorageRepository.findAll();
-        return EndPointResponse.getSuccessStatus(passwordStorageList);
+        return ResponseResult.ok(passwordStorageList);
     }
 
 
     @GetMapping("password-storage/{id}")
-    public ResponseEntity<?> getEntityById(@PathVariable Long id) {
+    public EndPointResponse<?> getEntityById(@PathVariable Long id) {
         PasswordStorage passwordStorage = passwordStorageRepository.findById(id);
-        return EndPointResponse.getSuccessStatus(passwordStorage);
+        return ResponseResult.ok(passwordStorage);
 
     }
 
 
     @PostMapping("password-storage")
-    public ResponseEntity<?> createEntity(@Valid @RequestBody PasswordStorageDTO passwordStorageDTO, Errors errors) {
+    public EndPointResponse<?> createEntity(@Valid @RequestBody PasswordStorageDTO passwordStorageDTO, Errors errors) {
         PasswordStorageValidator passwordStorageValidator = new PasswordStorageValidator();
         MessageListHandler messageListHandler = passwordStorageValidator.validatePasswordStorage(passwordStorageDTO, errors);
         if (messageListHandler.getHasErrors()) {
-            return EndPointResponse.getBadRequestStatus(messageListHandler);
+            return ResponseResult.ok(messageListHandler);
         }
 
         PasswordStorage passwordStorage = new PasswordStorage();
@@ -65,15 +65,15 @@ public class PasswordStorageController {
         passwordStorage.setQuestion1(passwordStorageDTO.getQuestion5());
         passwordStorage.setAnswer1(passwordStorageDTO.getAnswer5());
         this.passwordStorageRepository.save(passwordStorage);
-        return EndPointResponse.getSuccessStatus();
+        return ResponseResult.ok();
     }
 
     @PutMapping("/password-storage/{id}")
-    public ResponseEntity<?> updateEntity(@RequestBody PasswordStorageDTO passwordStorageDTO, @PathVariable Long id) {
+    public EndPointResponse<?> updateEntity(@RequestBody PasswordStorageDTO passwordStorageDTO, @PathVariable Long id) {
         PasswordStorage passwordStorage = passwordStorageRepository.findById(id);
         passwordStorageDTO.setUsername(passwordStorage.getUsername());
         this.passwordStorageRepository.save(passwordStorage);
-        return EndPointResponse.getSuccessStatus();
+        return ResponseResult.ok();
     }
 
 

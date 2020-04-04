@@ -14,10 +14,17 @@ public class ResponseResult<T> {
 
     }
 
-
     public ResponseResult(HttpStatus status, int code) {
         this.status = status;
         this.code = code;
+    }
+
+    public static <T> EndPointResponse<?> ok(T body) {
+        return new EndPointResponse<>(body, HttpStatus.OK);
+    }
+
+    public static <T> EndPointResponse<?> ok() {
+        return new EndPointResponse<>(HttpStatus.OK);
     }
 
     public HttpStatus getStatus() {

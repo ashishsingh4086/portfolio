@@ -5,16 +5,32 @@ import org.springframework.http.ResponseEntity;
 
 public class EndPointResponse<T> {
 
-    public  static<T> ResponseEntity<T> getSuccessStatus(T body) {
-        return new ResponseEntity<T>(body, HttpStatus.valueOf(HttpStatus.OK.value()));
+    private ResponseEntity<T> entity;
+    private T response;
+    private HttpStatus status;
+
+    public EndPointResponse(T response, HttpStatus status) {
+        this.response = response;
+        this.status = status;
     }
 
-    public  static<T> ResponseEntity<T> getSuccessStatus() {
-        return new ResponseEntity<T>(HttpStatus.valueOf(HttpStatus.OK.value()));
+    public EndPointResponse(HttpStatus status) {
+        this.status = status;
     }
 
-    public static<T> ResponseEntity<T> getBadRequestStatus(T body) {
-        return new ResponseEntity<T>(body, HttpStatus.valueOf(HttpStatus.BAD_REQUEST.value()));
+    public T getResponse() {
+        return response;
     }
 
+    public void setResponse(T response) {
+        this.response = response;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
 }
