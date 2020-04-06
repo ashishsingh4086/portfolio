@@ -1,8 +1,8 @@
 package com.ashish.portfolio.passwordStorage.controller;
 
 import com.ashish.portfolio.common.message.MessageListHandler;
-import com.ashish.portfolio.common.message.core.endpoint.EndPointResponse;
-import com.ashish.portfolio.common.message.core.endpoint.ResponseResult;
+import com.ashish.portfolio.common.core.endpoint.EndPointResponse;
+import com.ashish.portfolio.common.core.endpoint.ResponseResult;
 import com.ashish.portfolio.passwordStorage.model.PasswordStorage;
 import com.ashish.portfolio.passwordStorage.model.PasswordStorageDTO;
 import com.ashish.portfolio.passwordStorage.repository.PasswordStorageRepository;

@@ -1,32 +1,33 @@
 package com.ashish.portfolio.common.message;
 
 public class MessageHandler {
-    private String message;
-    private MessageSeverity severity;
+  private String message;
+  private MessageSeverity severity;
 
-    public MessageHandler(String message, MessageSeverity severity) {
-        this.message = message;
-        this.severity = severity;
-    }
+  public MessageHandler(String message, MessageSeverity severity) {
+    this.message = message;
+    this.severity = severity;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  public MessageHandler() {}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public String getMessage() {
+    return message;
+  }
 
-    public MessageSeverity getSeverity() {
-        return severity;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 
-    public void setSeverity(MessageSeverity severity) {
-        this.severity = severity;
-    }
+  public MessageSeverity getSeverity() {
+    return severity;
+  }
 
-    public static MessageHandler getErrors(String message) {
-        return new MessageHandler(message, MessageSeverity.SEVERITY_ERROR);
-    }
+  public void setSeverity(MessageSeverity severity) {
+    this.severity = severity;
+  }
 
+  public static MessageHandler getErrors(String message) {
+    return new MessageHandler(message, MessageSeverity.SEVERITY_ERROR);
+  }
 }

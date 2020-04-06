@@ -1,4 +1,4 @@
-package com.ashish.portfolio.common.message.core.endpoint;
+package com.ashish.portfolio.common.core.endpoint;
 
 import org.springframework.http.HttpStatus;
 
